@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName
 
 
 data class User (
-    @SerializedName("login")
-    val login: String? = "",
-    @SerializedName("node_id")
-    val node_id: String? = ""
+//    @SerializedName("login")
+//    val login: String? = "",
+    @SerializedName("res")
+    val res: String? = ""
 )

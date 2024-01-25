@@ -8,16 +8,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class NetworkConnectionManager {
-    fun callServer(listener: OnNetworkCallbackListener?, username: String?) {
+    fun callServer(listener: OnNetworkCallbackListener?) {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.github.com")
-            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("http://localhost:8080/")
             .build()
         val git = retrofit.create(GitHubService::class.java)
-        val call = git.getUser(username)
+        val call = git.getUser()
+
+//        var a = call?.body()
+//        var b = a
+
         call?.enqueue(object  : Callback<User?> {
             override fun onResponse(call: Call<User?>, response: Response<User?>) {
-//                TODO("Not yet implemented")
 
                 val user = response.body()
 
@@ -36,7 +38,6 @@ class NetworkConnectionManager {
             }
 
             override fun onFailure(call: Call<User?>, t: Throwable) {
-//                TODO("Not yet implemented")
 
                 if (listener != null) {
                     listener.onFailure(t)
@@ -44,10 +45,6 @@ class NetworkConnectionManager {
             }
 
         })
-//        val call: Call? = git.getUser(username)
-//        call.enqueue(object : Callback<User?>() {
-//            fun onResponse(response: Response<User?>?, retrofit: Retrofit?) {}
-//            fun onFailure(t: Throwable?) {}
-//        })
+
     }
 }

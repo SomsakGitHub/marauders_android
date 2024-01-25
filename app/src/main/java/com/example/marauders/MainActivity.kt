@@ -30,43 +30,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //Greeting("Android")
-//                    LoginScreen()
-                    var text = ""
-
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        TextField(
-                            value = text,
-                            onValueChange = { text = it },
-                            label = { Text("username") }
-                        )
-
-                        TextField(
-                            value = text,
-                            onValueChange = { text = it },
-                            label = { Text("password") }
-                        )
-
-                        Button(onClick = {
-                            NetworkConnectionManager().callServer(
-                                networkCallbackListener,
-                                "somsakGitHub"
-                            )
-                        }) {
-                            Text(text = "Login")
-                        }
-                    }
+                    LoginScreen()
                 }
             }
         }
     }
+}
+
+@Composable
+fun LoginScreen() {
+    var text = ""
 
     var networkCallbackListener: OnNetworkCallbackListener = object : OnNetworkCallbackListener {
         override
         fun onResponse(user: User?, retrofit: Retrofit?) {
-            Log.e("logUser=>",user?.node_id.toString())
+            Log.e("logUser=>",user?.res.toString())
         }
 
         override fun onBodyError(responseBodyError: ResponseBody?) {
@@ -81,20 +59,36 @@ class MainActivity : ComponentActivity() {
             //fail any course
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        TextField(
+            value = text,
+            onValueChange = { text = it },
+            label = { Text("username") }
+        )
+
+        TextField(
+            value = text,
+            onValueChange = { text = it },
+            label = { Text("password") }
+        )
+
+        Button(onClick = {
+            NetworkConnectionManager().callServer(
+                networkCallbackListener
+            )
+        }) {
+            Text(text = "Login")
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun LoginPreview() {
     MaraudersTheme {
-        Greeting("Android")
+        LoginScreen()
     }
 }
