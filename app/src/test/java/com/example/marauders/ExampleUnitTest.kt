@@ -1,4 +1,4 @@
-package com.example.marauders_android
+package com.example.marauders
 
 import org.junit.Test
 

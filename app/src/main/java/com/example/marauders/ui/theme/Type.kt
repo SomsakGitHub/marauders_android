@@ -1,4 +1,4 @@
-package com.example.marauders_android.ui.theme
+package com.example.marauders.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
