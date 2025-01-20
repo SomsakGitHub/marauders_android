@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             MaraudersTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Androidd",
+                        name = "Androiddd",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
